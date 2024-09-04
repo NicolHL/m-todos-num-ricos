@@ -1,0 +1,26 @@
+import numpy as np
+
+# Constante de Stefan-Boltzmann
+sigma = 5.67e-8  # W/m^2K^4
+
+# Datos del problema
+A = 0.15  # m^2
+e = 0.90
+T = 650  # K
+delta_T = 20  # Incertidumbre en T
+
+# Cálculo de H
+H = A * e * sigma * T**4
+
+# Cálculo del error en H usando propagación de errores
+dH_dT = 4 * A * e * sigma * T**3  # Derivada parcial de H respecto a T
+error_T = dH_dT * delta_T
+
+# Imprimir resultados
+print(f"Tasa de radiación H: {H:.2f} W")
+print(f"Error en H debido a la incertidumbre en T: {error_T:.2f} W")
+
+# Cálculo para T = 650 ± 40 K
+delta_T2 = 40
+error_T2 = dH_dT * delta_T2
+print(f"Error en H para delta_T = 40 K: {error_T2:.2f} W")
